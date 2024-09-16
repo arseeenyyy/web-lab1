@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en_US"> 
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="author" content="Rubtsov Arseniy Dmitrievich">
+        <meta name="description" content="Web-programming, lab1">
+        <meta name="keywords" content="ITMO, Web-programming, VT">
+        <title>Laboratory work no. 1 | Web-programming</title>
+        <style>
+            :root {
+                --primary-background-color: #f0e6dc;
+                --secondary-background-color: #d9c9b7;
+                --head-background-color: #f2f2f2;
+                --default-borders-color: black;
+                --error-color: #f54c45;
+                --default-borders-radius: 10px;
+            }
+            body {
+                background-color: var(--primary-background-color);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            header {
+                background-color: var(--head-background-color);
+                text-align: center;
+                font-family: serif;
+                color: black;
+                font-size: 15px;
+                padding: 20px;
+                border: 3px solid #333;
+                border-radius: var(--default-borders-radius);
+                margin-bottom: 10px;
+            }
+            #credit a {
+                text-align: center;
+                text-decoration: none;
+                color: inherit;
+            }
+            td {
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                padding: 10px;
+                vertical-align: top;
+            }
+            .content {
+                background-color: var(--secondary-background-color);
+                border-radius: var(--default-borders-radius);
+                border: 2px solid var(--default-borders-color);
+            }
+            .title-plate {
+                text-align: center;
+                font-size: 18px;
+                font-weight: bold;
+                line-height: 2;
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                margin-top: auto;
+                background-color: var(--head-background-color);
+            }
+            #graph {
+                width: 50%;
+                text-align: center;
+            }
+            #result-table {
+                width: 100%;
+                text-align: center;
+                border-collapse: collapse;
+            }
+            #result-table th, #result-table td {
+                border: 1px solid var(--default-borders-color);
+                padding: 8px;
+            }
+            form {
+                text-align: center;
+            }
+
+            /* Стили для кнопок выбора X */
+            .x-button {
+                background-color: var(--secondary-background-color);
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                color: black;
+                font-size: 16px;
+                width: 50px;
+                height: 30px;
+                margin: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .x-button:hover {
+                background-color: var(--primary-background-color);
+            }
+
+            input[type="text"] {
+                background-color: var(--primary-background-color);
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                font-size: 16px;
+                padding: 10px;
+                width: 200px;
+                height: 15px;
+                margin: 10px;
+            }
+
+            select {
+                background-color: var(--primary-background-color);
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                font-size: 16px;
+                padding: 10px;
+                width: 200px;
+                height: 40px;
+                margin: 10px;
+                cursor: pointer;
+            }
+
+            input[type="submit"] {
+                background-color: var(--secondary-background-color);
+                border: 2px solid var(--default-borders-color);
+                border-radius: var(--default-borders-radius);
+                font-size: 18px;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+
+            input[type="submit"]:hover {
+                background-color: var(--primary-background-color);
+            }
+            .x-button.active {
+                background-color: var(--error-color);
+                color: white;
+                border: 2px solid black;
+            }   
+            .error-message {
+                color: red;
+                font-size: 12px;
+                margin-top: 5px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Web-programming | Laboratory no. 1 | Var no. 115213</h1>
+            <div id="credit">
+                <a href="https://github.com/arseeenyyy">Rubtsov Arseniy Dmitrievich | P3206</a>
+            </div>
+        </header>
+        <table id="mainTable">
+            <tr>
+                <td id="graph" class="content">
+                    <h2 class="title-plate">Graph</h2>
+                    <svg width="400" height="400" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg" >
+                        <line x1="-200" y1="0" x2="200" y2="0" stroke="black"></line> 
+                        <line x1="0" y1="200" x2="0" y2="-200" stroke="black"></line> 
+                        
+                        <line x1="-150" y1="-5" x2="-150" y2="5" stroke="black"></line>
+                        <text x="-160" y="20" font-size="20">-R</text>
+                        
+                        <line x1="-75" y1="-5" x2="-75" y2="5" stroke="black"></line>
+                        <text x="-85" y="20" font-size="20">-R/2</text>
+                        
+                        <line x1="150" y1="-5" x2="150" y2="5" stroke="black"></line>
+                        <text x="140" y="20" font-size="20">R</text>
+                        
+                        <line x1="75" y1="-5" x2="75" y2="5" stroke="black"></line>
+                        <text x="65" y="20" font-size="20">R/2</text>
+                        
+                        <line x1="-5" y1="150" x2="5" y2="150" stroke="black"></line>
+                        <text x="10" y="155" font-size="20">R</text>
+                        
+                        <line x1="-5" y1="75" x2="5" y2="75" stroke="black"></line>
+                        <text x="10" y="80" font-size="20">R/2</text>
+                        
+                        <line x1="-5" y1="-150" x2="5" y2="-150" stroke="black"></line>
+                        <text x="10" y="-140" font-size="20">-R</text>
+                        
+                        <line x1="-5" y1="-75" x2="5" y2="-75" stroke="black"></line>
+                        <text x="10" y="-65" font-size="20">-R/2</text>
+                        
+                        <polygon points="0,0 0,-75 75,0" fill-opacity="0.4" stroke="navy" fill="blue"></polygon>                        
+                        <path d="M 0 0 H 150 A 150 150 0 0 1 0 150 V 0 " fill-opacity="0.4" stroke="navy" fill="blue"></path>
+                        <rect x="-150" y="0" width="150" height="150" fill-opacity="0.4" stroke="navy" fill="blue"></rect> 1
+                        <polygon points="200,0 190,5 190,-5" fill="black"></polygon> 
+                        <polygon points="0,-200 -5,-190 5,-190" fill="black"></polygon> 
+                        <text x="180" y="20" font-size="20">R</text>
+                        <text x="-40" y="-180" font-size="20">R</text>
+                    </svg>
+                </td>
+                <td class="content">
+                    <h2 class="title-plate">Input Data</h2>
+                    <form id="input-form" method="get">
+                        <label for="x" class="data-label">X:</label>
+                        <input type="hidden" name="x" id="x-value" value="">
+                        <input type="button" class="x-button" value="-3">
+                        <input type="button" class="x-button" value="-2">
+                        <input type="button" class="x-button" value="-1">
+                        <input type="button" class="x-button" value="0">
+                        <input type="button" class="x-button" value="1">
+                        <input type="button" class="x-button" value="2">
+                        <input type="button" class="x-button" value="3">
+                        <input type="button" class="x-button" value="4">
+                        <input type="button" class="x-button" value="5"> 
+                        <br>
+                        <label for="y" class="data-labels">Y:</label>
+                        <input type="text" id="y-value" name="y" placeholder="Enter Y {-3;3}">
+                        <br>
+                        <label for="r" class="data-labels">R:</label>
+                        <select name="r-select" id="r-value" required>
+                            <option value="">Choose r :3</option>
+                            <option value="1">1</option>
+                            <option value="1.5">1.5</option>
+                            <option value="2">2</option>
+                            <option value="2.5">2.5</option>
+                            <option value="3">3</option> 
+                        </select>
+                        <br>
+                        <input type="submit" value="Submit">
+                        <div id="error-message"></div>
+                    </form>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="results" class="content" colspan="2">
+                    <h2 class="title-plate">Hit Results</h2>
+                    <table id="result-table">
+                        <tr>
+                            <th>X</th>
+                            <th>Y</th>
+                            <th>R</th>
+                            <th>Current Time</th>
+                            <th>Execution Time</th>
+                            <th>Hit result</th>
+                        </tr>
+                    </table>
+                </td>                
+            </tr>
+        </table>
+        <script src="highlight.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
